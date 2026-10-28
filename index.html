@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador da Izabela</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fundo Tridimensional com Objetos 3D Voando -->
+    <div class="bg-3d-container">
+        <div class="shape shape-cube"></div>
+        <div class="shape shape-pyramid"></div>
+        <div class="shape shape-sphere"></div>
+        <div class="shape shape-ring"></div>
+        <div class="shape shape-cube-small"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <h1 class="gradient-text">Organizador da Izabela</h1>
+            <p class="subtitle">Seu espaço pessoal para gerenciar rotinas, manter o foco e cultivar hábitos saudáveis com alta produtividade.</p>
+        </header>
+
+        <!-- Seção de Gerenciamento de Tarefas -->
+        <section class="task-section main-card">
+            <h2>Sua Rotina Diária</h2>
+            <div class="task-input-group">
+                <input type="text" id="taskInput" placeholder="Digite uma nova tarefa ou rotina...">
+                <button id="addTaskBtn" class="btn-gradient">Adicionar</button>
+            </div>
+            <ul id="taskList" class="task-list">
+                <!-- Tarefas adicionadas via JavaScript -->
+            </ul>
+        </section>
+
+        <!-- Seção de Cards de Dicas -->
+        <section class="tips-section">
+            <h2>Dicas de Produtividade e Bem-estar</h2>
+            <div class="cards-grid">
+                
+                <div class="tip-card" onclick="openModal('modal-pomodoro')">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Técnica Pomodoro</h3>
+                    <p>Gerencie seu tempo em blocos de foco total e pausas estratégicas.</p>
+                    <span class="card-action">Clique para ver detalhes &rarr;</span>
+                </div>
+
+                <div class="tip-card" onclick="openModal('modal-habits')">
+                    <div class="card-icon">⚡</div>
+                    <h3>Empilhamento de Hábitos</h3>
+                    <p>Associe novos hábitos a rotinas que você já executa no dia a dia.</p>
+                    <span class="card-action">Clique para ver detalhes &rarr;</span>
+                </div>
+
+                <div class="tip-card" onclick="openModal('modal-priorities')">
+                    <div class="card-icon">🎯</div>
+                    <h3>Matriz de Prioridades</h3>
+                    <p>Aprenda a diferenciar o que é urgente do que é realmente importante.</p>
+                    <span class="card-action">Clique para ver detalhes &rarr;</span>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Modais explicativos -->
+    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+        
+        <div id="modal-pomodoro" class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 class="gradient-text">Técnica Pomodoro</h3>
+            <p><strong>Como funciona:</strong> Trabalhe por 25 minutos com foco total (sem distrações) e faça uma pausa de 5 minutos.</p>
+            <p>Após completar 4 ciclos de foco, faça uma pausa mais longa de 15 a 30 minutos.</p>
+            <p><strong>Benefício para a Izabela:</strong> Mantém o cérebro descansado, evita o cansaço mental e melhora o rendimento em tarefas longas.</p>
+        </div>
+
+        <div id="modal-habits" class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 class="gradient-text">Empilhamento de Hábitos</h3>
+            <p><strong>Como funciona:</strong> Identifique uma ação diária automática (ex: tomar café) e conecte o novo hábito a ela.</p>
+            <p><em>Fórmula:</em> "Depois de [Hábito Atual], eu vou [Novo Hábito]". Exemplo: "Depois de tomar meu café, vou revisar as tarefas do dia no Organizador".</p>
+            <p><strong>Benefício para a Izabela:</strong> Facilita a criação de rotinas sem depender exclusivamente da força de vontade.</p>
+        </div>
+
+        <div id="modal-priorities" class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 class="gradient-text">Matriz de Eisenhower</h3>
+            <p><strong>Como funciona:</strong> Divida suas tarefas em 4 quadros:</p>
+            <ul>
+                <li><strong>Urgente + Importante:</strong> Faça agora.</li>
+                <li><strong>Não Urgente + Importante:</strong> Agende para fazer.</li>
+                <li><strong>Urgente + Não Importante:</strong> Delegue se possível.</li>
+                <li><strong>Não Urgente + Não Importante:</strong> Elimine.</li>
+            </ul>
+            <p><strong>Benefício para a Izabela:</strong> Reduz o estresse diário e garante foco no que traz resultados reais.</p>
+        </div>
+
+    </div>
+
+    <!-- Script Inline Simples para Interatividade -->
+    <script>
+        // Função para adicionar tarefas
+        document.getElementById('addTaskBtn').addEventListener('click', addTask);
+        document.getElementById('taskInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTask();
+        });
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const text = input.value.trim();
+            if (text === '') return;
+
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            li.innerHTML = `
+                <span onclick="toggleTask(this)">${text}</span>
+                <button class="delete-btn" onclick="deleteTask(this)">&times;</button>
+            `;
+
+            document.getElementById('taskList').appendChild(li);
+            input.value = '';
+        }
+
+        function toggleTask(element) {
+            element.parentElement.classList.toggle('completed');
+        }
+
+        function deleteTask(button) {
+            button.parentElement.remove();
+        }
+
+        // Funções do Modal
+        function openModal(modalId) {
+            const overlay = document.getElementById('modal-overlay');
+            const modals = document.querySelectorAll('.modal-content');
+            
+            modals.forEach(m => m.style.display = 'none');
+            document.getElementById(modalId).style.display = 'block';
+            overlay.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

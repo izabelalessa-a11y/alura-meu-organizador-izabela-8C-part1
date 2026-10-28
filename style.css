@@ -1,0 +1,357 @@
+/* Resets e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Texto em Degradê Azul e Roxo */
+.gradient-text {
+    background: linear-gradient(135deg, #00d2ff 0%, #928dab 50%, #8a2be2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* App Container */
+.app-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: #a0a0b0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Botões com Degradê */
+.btn-gradient {
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+}
+
+/* Cartão Principal / Lista de Tarefas */
+.main-card {
+    background: rgba(20, 20, 30, 0.7);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.main-card h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #00d2ff;
+}
+
+.task-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #101018;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.task-input-group input:focus {
+    border-color: #8a2be2;
+}
+
+/* Lista de Tarefas */
+.task-list {
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #161622;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #8a2be2;
+    transition: all 0.3s ease;
+}
+
+.task-item span {
+    cursor: pointer;
+    flex: 1;
+}
+
+.task-item.completed span {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.task-item.completed {
+    border-left-color: #00d2ff;
+    opacity: 0.6;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* Grid de Cards de Dicas */
+.tips-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #00d2ff;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.tip-card {
+    background: linear-gradient(145deg, rgba(25, 25, 40, 0.8), rgba(15, 15, 25, 0.8));
+    border: 1px solid rgba(138, 43, 226, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    border-color: #00d2ff;
+    box-shadow: 0 8px 25px rgba(0, 210, 255, 0.2);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.tip-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.tip-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.card-action {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #8a2be2;
+    font-weight: bold;
+}
+
+/* Modal e Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #12121c;
+    border: 2px solid #8a2be2;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    display: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.modal-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p, .modal-content li {
+    color: #ddd;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.modal-content ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+/* Fundo 3D com Objetos Voando */
+.bg-3d-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    perspective: 1000px;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.25;
+    animation: float3d 20s infinite ease-in-out alternate;
+}
+
+/* Cubo 3D */
+.shape-cube {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #8a2be2, #00d2ff);
+    top: 15%;
+    left: 10%;
+    border-radius: 20px;
+    transform: rotateX(45deg) rotateY(45deg) translateZ(50px);
+    animation-duration: 18s;
+}
+
+/* Pirâmide/Triângulo 3D */
+.shape-pyramid {
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 120px solid #4a00e0;
+    top: 60%;
+    left: 80%;
+    animation-duration: 22s;
+    animation-delay: -5s;
+}
+
+/* Esfera 3D com Degradê */
+.shape-sphere {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle at 30% 30%, #00d2ff, #000);
+    border-radius: 50%;
+    top: 70%;
+    left: 15%;
+    animation-duration: 25s;
+    animation-delay: -2s;
+}
+
+/* Anel / Rosca 3D */
+.shape-ring {
+    width: 100px;
+    height: 100px;
+    border: 20px solid #8e2de2;
+    border-radius: 50%;
+    top: 20%;
+    left: 75%;
+    transform: rotateX(70deg) rotateY(20deg);
+    animation-duration: 16s;
+}
+
+.shape-cube-small {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00d2ff, #4a00e0);
+    top: 45%;
+    left: 50%;
+    border-radius: 10px;
+    animation-duration: 14s;
+    animation-delay: -8s;
+}
+
+/* Animação Tridimensional Flutuante */
+@keyframes float3d {
+    0% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(-50px) rotateX(180deg) rotateY(90deg) scale(1.1);
+    }
+    100% {
+        transform: translateY(30px) rotateX(360deg) rotateY(180deg) scale(0.9);
+    }
+}
